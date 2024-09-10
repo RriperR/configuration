@@ -7,7 +7,7 @@ grep '^[^:]*' /etc/passwd | cut -d: -f1 | sort
 ```
 
 ## Задача 2
-Вывести данные /etc/protocols в отформатированном и отсортированном порядке для 5 наибольших портов, как показано в примере ниже:
+Вывести данные /etc/protocols в отформатированном и отсортированном порядке для 5 наибольших портов:
 
 ```
 awk '{print $2, $1}' /etc/protocols | sort -n -r | head -n 5
@@ -25,6 +25,22 @@ awk '{print $2, $1}' /etc/protocols | sort -n -r | head -n 5
 
 Перед отправкой решения проверьте его в ShellCheck на предупреждения.
 
+```
+#!/bin/bash
+
+text=$*
+length=${#text}
+
+# Формирование символов рамки от 1 до длины слова + 2 пробела
+for _ in $(seq 1 $((length + 2))); do
+    line+="-"
+done
+
+echo "+${line}+"
+echo "| ${text} |"
+echo "+${line}+"
+```
+
 ## Задача 4
 
 Написать программу для вывода всех идентификаторов (по правилам C/C++ или Java) в файле (без повторений).
@@ -33,6 +49,17 @@ awk '{print $2, $1}' /etc/protocols | sort -n -r | head -n 5
 
 ```
 h hello include int main n printf return stdio void world
+```
+
+```
+#!/bin/bash
+
+file="$1"
+
+identifiers=$(grep -o -E '\b[a-zA-Z]*\b' "$file" | sort -u)
+
+echo "Идентификаторы:"
+echo "$identifiers"
 ```
 
 ## Задача 5
